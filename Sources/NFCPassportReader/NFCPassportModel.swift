@@ -402,7 +402,7 @@ public class NFCPassportModel {
     }
 
     public func getDocumentSigningCertificateFromSod () -> X509Wrapper? {
-        let sod = getDataGroup(.SOD)
+        let sod = getDataGroup(.SOD)!
         let data = Data(sod.body)
         let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7( pkcs7Der: data ).first!
         return cert
