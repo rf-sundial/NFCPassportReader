@@ -66,7 +66,7 @@ public class SOD : DataGroup {
     private var asn1 : ASN1Item!
     private var pubKey : OpaquePointer?
 
-    override var datagroupType: DataGroupId { .SOD }
+    public override var datagroupType: DataGroupId { .SOD }
     
     required init( _ data : [UInt8] ) throws {
         try super.init(data)
