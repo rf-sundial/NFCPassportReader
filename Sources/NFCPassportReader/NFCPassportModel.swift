@@ -401,6 +401,13 @@ public class NFCPassportModel {
         return revoked
     }
 
+    public func getDocumentSigningCertificateFromSod () -> X509Wrapper? {
+        let sod = getDataGroup(.SOD)
+        let data = Data(sod.body)
+        let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7( pkcs7Der: data ).first!
+        return cert
+    }
+
     private func validateAndExtractSigningCertificates( masterListURL: URL ) throws {
         self.passportCorrectlySigned = false
         
@@ -408,9 +415,13 @@ public class NFCPassportModel {
             throw PassiveAuthenticationError.SODMissing("No SOD found" )
         }
 
+	print("VALIDATEVALIDATEVALIDATEVALIDATEVALIDATEVALIDATEVALIDATEVALIDATEVALIDATEVALIDATE ")
+
         let data = Data(sod.body)
         let cert = try OpenSSLUtils.getX509CertificatesFromPKCS7( pkcs7Der: data ).first!
         self.certificateSigningGroups[.documentSigningCertificate] = cert
+
+	print(cert)	
 
         let rc = OpenSSLUtils.verifyTrustAndGetIssuerCertificate( x509:cert, CAFile: masterListURL )
         switch rc {
