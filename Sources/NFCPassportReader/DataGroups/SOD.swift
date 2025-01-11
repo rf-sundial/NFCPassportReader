@@ -137,7 +137,7 @@ public class SOD : DataGroup {
     /// Gets the signed attributes section (if present)
     /// - Returns: the signed attributes section
     /// - Throws: Error if we can't find or read the signed attributes
-    func getSignedAttributes( ) throws -> Data {
+    public func getSignedAttributes( ) throws -> Data {
         
         // Get the SignedAttributes section.
         guard let signedData = asn1.getChild(1)?.getChild(0),
