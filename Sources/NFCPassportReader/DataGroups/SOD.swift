@@ -201,7 +201,7 @@ public class SOD : DataGroup {
     /// Gets the signature data (if present)
     /// - Returns: the signature
     /// - Throws: Error if we can't find or read the signature
-    func getSignature( ) throws -> Data {
+    public func getSignature( ) throws -> Data {
         
         guard let signedData = asn1.getChild(1)?.getChild(0),
               let signerInfo = signedData.getChild(4),
